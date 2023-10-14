@@ -6,12 +6,10 @@ import Task from './Task.js'
 const Tasks = () => {
 
   const [tasks,setTasks]= useState([]);
-  // const [tasks,settasks]= useState();
 
   const sendRequest = async()=>{
     const res = await axios.get("http://localhost:8000/api/task").catch(err=>console.log(err));
     const data = await res.data;
-    console.log("data is",data)
     return data;
   }
   useEffect(()=>{
@@ -19,8 +17,6 @@ const Tasks = () => {
     sendRequest().then((data)=>setTasks(data.user))
 
   },[])
-
-  console.log(tasks);
   
   return (
     <div>
