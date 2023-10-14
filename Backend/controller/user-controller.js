@@ -41,16 +41,7 @@ const signup = async(req,res,next)=>{
         password:hashed,
         tasks:[],
     })
-    // const token = jwt.sign(
-    //   { user_id: user._id, email },
-    //   "JWT_TOKEN",
-    //   {
-    //     expiresIn: "2h",
-    //   }
-    // );
-    // save user token
-    
-    // user.token = token;
+   
     try {
         user.save();
         
@@ -74,9 +65,7 @@ const login = async (req,res,next)=>{
       return res.status(400).json({message:"user not found"});
   }
     let isCorrect;
-
-    
-    
+ 
     try {
       isCorrect = await bcrypt.compare(password,existinguser.password);
       const token = jwt.sign(
@@ -87,7 +76,6 @@ const login = async (req,res,next)=>{
         }
       );
       console.log("token in login route  is",token)
-      // save user token
       existinguser.token = token;
       
     } catch (error) {
@@ -100,7 +88,6 @@ const login = async (req,res,next)=>{
   }
  
   return res.status(200).json({message:existinguser});
-  // return res.status(200).json({message:"successfully login"});
 }
 
 
