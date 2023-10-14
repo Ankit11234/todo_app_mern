@@ -25,21 +25,11 @@ const TaskDetail = () => {
       [e.target.name]:e.target.value
     }))
   }
-  // const sendRequest=async()=>{
-  //   const res = await axios.post('/api/task/add',{
-  //     title: inputs.title,
-  //     description: inputs.description,
-  //     image: inputs.imageurl,
-  //     user: localStorage.getItem("userId")
-  //   }).catch((err)=>console.log(err));
-  //   const data = await res.data;
-  //   return data;
-  // }
+
 
   const details = async()=>{
     const res = await axios.get(`http://localhost:8000/api/task/${id}`).catch((err)=>console.log(err));
     const data = await res.data;
-    console.log("data is taskdeatil ",data)
     return data;
   }
 
@@ -72,7 +62,6 @@ const TaskDetail = () => {
 
   }
 
-  // console.log(task)
   return (
     <div>
       {inputs && 
