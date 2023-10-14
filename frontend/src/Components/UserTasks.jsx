@@ -10,7 +10,6 @@ const Usertasks = () => {
   const sendRequest = async()=>{
     const res = await axios.get(`http://localhost:8000/api/task/user/${id}`).catch((err)=>console.log(err));
     const data = await res.data;
-    // console.log("data is",data);
     return data;
   }
   useEffect(() => {
