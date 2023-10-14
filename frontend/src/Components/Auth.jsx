@@ -26,37 +26,26 @@ const Auth = () => {
   }
   
   const sendRequest = async(type="login")=>{
-
-   
-    // console.log("res is ",res);
     const res = await axios.post(`http://localhost:8000/api/user/${type}`,{
       name: type==="login" ?"":inputs.name,
       email: inputs.email,
       password: inputs.password
     }).catch(err=>console.log("error is ",err));
-
-    // console.log(inputs);
     const data = await res.data;
-    console.log("data is",data);
-    console.log("message is",data.message);
     return data;
   
     
   }
   const handleSubmit=(e)=>{
     e.preventDefault();
-    // console.log(inputs);
     if(isSingUp){
       sendRequest("signup").then((data)=>localStorage.setItem("userId",data.message._id))
       .then(()=>navigate("/auth"))
       setisSignUp(false);
-      // .then(()=>dispatch(authActions.login()))
-      // .then(data=>console.log(data));
     }else{
       sendRequest()
       .then((data)=>localStorage.setItem("userId",data.message._id))
       .then(()=>dispatch(authActions.login())).then(()=>navigate("/tasks"));
-      // .then((data)=>console.log("data is",data))
     }
    
   }
