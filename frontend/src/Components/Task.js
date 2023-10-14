@@ -51,10 +51,8 @@ const Task=({title,description,userName,isUser,id})=>{
             <Avatar sx={{ bgcolor: "red" }} aria-label="recipe">
             {userName} 
             </Avatar>
-          }
-        
+          }       
           title={title}
-          // subheader={new Date()}
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
