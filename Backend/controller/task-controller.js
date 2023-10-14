@@ -11,7 +11,6 @@ const getAlltasks = async(req,res,next)=>{
       
         try {
           tasks = await Task.find().sort({Date:-1}).populate('user');
-          // tasks.sort({Date:-1});
           
         } catch (error) {
           console.log(error);
@@ -47,20 +46,16 @@ const addtasks=async(req,res,next)=>{
   
     try {
         const session = await mongoose.startSession();
-        //  session.startTransaction();
         await task.save({session});
-
         existinguser.tasks.push(task);
         await existinguser.save({session});
-        // await session.commitTransaction();
       
     } catch (error) {
       console.log(error);
       return res.status(500),json({message:error});
     }
   
-
-   return res.status(200).json({task});
+  return res.status(200).json({task});
 }
 
 
@@ -82,10 +77,9 @@ const updatetask = async(req,res,next)=>{
       if(!task){
         return res.status(500).json({message:"unable to update task"});
       }
-      return res.status(200).json({message:"successfully updted tasks"});
+      return res.status(200).json({message:"successfully updated tasks"});
 }
 const deletetask = async(req,res,next)=>{
-    // const {description,title,image,user}=req.body;
     const id = req.params.id;
     let task;
     try {
@@ -126,11 +120,8 @@ const getById= async(req,res,next)=>{
 const getByuserId = async(req,res,next)=>{
     const id = req.params.id;
     let usertask;
-    // console.log("id is ",id);
     try {
         usertask = await User.findById(id).populate(('tasks'));
-        // .populate("tasks");
-        // usertask.save();
         
     } catch (error) {
         return console.log(error);
